@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import "./styles.css";
 
@@ -320,6 +320,21 @@ function Contact() {
   );
 }
 function App() {
+  useLayoutEffect(() => {
+    const root = document.documentElement;
+    const updateScale = () => {
+      // Keep the 1200px Figma composition; mobile awaits its own design.
+      const scale = Math.max(root.clientWidth, 768) / 1200;
+      root.style.setProperty("--page-scale", String(scale));
+    };
+    updateScale();
+    const observer = new ResizeObserver(updateScale);
+    observer.observe(root);
+    return () => {
+      observer.disconnect();
+      root.style.removeProperty("--page-scale");
+    };
+  }, []);
   return (
     <div className="page">
       <Sidebar />
