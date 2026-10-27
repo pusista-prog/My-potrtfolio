@@ -6,10 +6,17 @@
   font-display: swap;
 }
 @font-face {
-  font-family: "Roboto Mono";
-  src: url("/fonts/roboto-mono-latin-400-normal.woff2") format("woff2");
+  font-family: "PP Telegraf";
+  src: url("/fonts/PPTelegraf-Regular.woff2") format("woff2");
   font-style: normal;
   font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Roboto Mono";
+  src: url("/fonts/roboto-mono-latin-300-normal.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 300;
   font-display: swap;
 }
 @font-face {
@@ -25,10 +32,11 @@
   background: #eee;
   font-synthesis: none;
   font-size: 12px;
-  font-weight: 400;
+  font-weight: 300;
   line-height: 1.25;
   letter-spacing: -0.48px;
   --page-scale: 1;
+  --edge-inset: calc(10px / var(--page-scale));
   --blue: #2996df;
   --paper: #eee;
   --card: #dde9f2;
@@ -85,7 +93,7 @@ a:hover {
   text-underline-offset: 3px;
 }
 .page {
-  padding: 10px;
+  padding: var(--edge-inset) 10px;
   display: grid;
   grid-template-columns: 228px minmax(0, 1fr);
   gap: 10px;
@@ -95,8 +103,8 @@ a:hover {
 }
 .sidebar {
   position: sticky;
-  top: 10px;
-  height: calc(100dvh / var(--page-scale) - 20px);
+  top: var(--edge-inset);
+  height: calc(100dvh / var(--page-scale) - 2 * var(--edge-inset));
   min-height: 0;
   align-self: start;
   display: flex;
@@ -207,7 +215,7 @@ a:hover {
 .sidebar h1 {
   font-size: 24px;
   line-height: 0.93;
-  letter-spacing: -0.6px;
+  letter-spacing: -0.02em;
   margin-bottom: 8px;
 }
 .bio {
@@ -229,7 +237,8 @@ a:hover {
   position: relative;
   display: flex;
   justify-content: space-between;
-  padding-bottom: 5px;
+  padding: 0 1px 6px;
+  line-height: 15px;
 }
 .sidebar dl div:after {
   content: "";
@@ -238,7 +247,7 @@ a:hover {
   left: 0;
   width: 100%;
   height: 1px;
-  background: url("/images/imgLine3.svg") no-repeat left center;
+  border-bottom: 1px dotted currentColor;
 }
 .sidebar dt {
   font-weight: 500;
@@ -275,7 +284,10 @@ nav {
   height: 25px;
 }
 .projects {
-  padding-top: 206px;
+  padding-top: max(
+    0px,
+    calc(100dvh / var(--page-scale) - 2 * var(--edge-inset) - 453px)
+  );
 }
 .section-heading {
   text-transform: uppercase;
@@ -286,21 +298,23 @@ nav {
   gap: 14px;
 }
 .section-number {
+  font-family: "PP Telegraf", sans-serif;
+  font-weight: 400;
   font-size: 12px;
   line-height: 20px;
   height: 20px;
-  letter-spacing: -0.6px;
+  letter-spacing: -0.045em;
 }
 .section-heading h2 {
   font-size: 44px;
   line-height: 37px;
-  letter-spacing: -1.76px;
+  letter-spacing: -0.035em;
 }
 .project-grid {
   margin-top: 22px;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
+  gap: var(--edge-inset) 10px;
 }
 .project {
   background: var(--card);
@@ -352,10 +366,21 @@ nav {
     transform 0.22s;
   pointer-events: none;
 }
-.project:hover .learn-more,
 .project:focus-visible .learn-more {
   opacity: 1;
   transform: translateY(0);
+}
+.project-cursor {
+  position: fixed;
+  z-index: 1000;
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(var(--page-scale));
+  transition: none;
+}
+@media (hover: hover) and (pointer: fine) {
+  .project {
+    cursor: none;
+  }
 }
 .project-tags {
   position: absolute;
@@ -422,7 +447,7 @@ nav {
 .skill h3 {
   font-size: 16px;
   line-height: 0.93;
-  letter-spacing: -0.4px;
+  letter-spacing: -0.02em;
   margin-bottom: 8px;
 }
 .strengths-icon {
@@ -466,6 +491,8 @@ nav {
   margin-top: 110px;
 }
 .heading-3 .section-number {
+  font-family: "PP Telegraf", sans-serif;
+  font-weight: 400;
   height: 10px;
   line-height: 10px;
 }
@@ -506,7 +533,7 @@ nav {
 }
 .fact > img {
   flex: none;
-  margin-top: 0;
+  margin-top: 1.5px;
 }
 .fact-tennis {
   top: 65px;
@@ -553,7 +580,7 @@ nav {
 .contact h2 {
   font-size: 24px;
   line-height: 1;
-  letter-spacing: -0.48px;
+  letter-spacing: -0.015em;
   text-transform: none;
   margin-top: 6px;
 }
@@ -619,7 +646,7 @@ nav {
   right: 14px;
 }
 .page {
-  padding-bottom: 10px;
+  padding-bottom: var(--edge-inset);
 }
 @media (prefers-reduced-motion: reduce) {
   html {

@@ -1,4 +1,5 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { createRoot } from "react-dom/client";
 import "./styles.css";
 
@@ -127,6 +128,66 @@ function SectionHeading({
     </header>
   );
 }
+function ProjectCard({ project }: { project: (typeof projects)[number] }) {
+  const [cursor, setCursor] = useState<{ x: number; y: number } | null>(null);
+  const followPointer = (event: React.PointerEvent<HTMLElement>) => {
+    if (event.pointerType === "mouse") {
+      setCursor({ x: event.clientX, y: event.clientY });
+    }
+  };
+  return (
+    <article
+      className="project"
+      tabIndex={0}
+      aria-label={`${project.title} project preview`}
+      onPointerEnter={followPointer}
+      onPointerMove={followPointer}
+      onPointerLeave={() => setCursor(null)}
+    >
+      <div className="project-picture">
+        <div className="project-layers">
+          {project.layers.map((layer) => (
+            <img
+              key={layer.name}
+              src={image(layer.name, "jpg")}
+              alt=""
+              style={{ left: 0, top: 0, width: "100%", height: "100%" }}
+            />
+          ))}
+        </div>
+        <span className="learn-more">
+          learn more
+          <Graphic name="imgVector234257606" />
+        </span>
+        <div className="project-tags">
+          {project.tags.map((tag) => (
+            <span key={tag}>{tag}</span>
+          ))}
+        </div>
+      </div>
+      <div className="project-caption">
+        <h3>{project.title}</h3>
+        <div>
+          {project.categories.map((category) => (
+            <span key={category}>{category}</span>
+          ))}
+        </div>
+      </div>
+      {cursor &&
+        createPortal(
+          <span
+            className="learn-more project-cursor"
+            aria-hidden="true"
+            style={{ left: cursor.x, top: cursor.y }}
+          >
+            learn more
+            <Graphic name="imgVector234257606" />
+          </span>,
+          document.body,
+        )}
+    </article>
+  );
+}
 function Projects() {
   return (
     <section id="projects" className="projects">
@@ -136,48 +197,7 @@ function Projects() {
       </SectionHeading>
       <div className="project-grid">
         {projects.map((project) => (
-          <article
-            className="project"
-            key={project.title}
-            tabIndex={0}
-            aria-label={`${project.title} project preview`}
-          >
-            <div className="project-picture">
-              <div className="project-layers">
-                {project.layers.map((layer) => (
-                  <img
-                    key={layer.name}
-                    src={image(layer.name, "jpg")}
-                    alt=""
-                    style={{
-                      left: `${(layer.x / 466) * 100}%`,
-                      top: `${(layer.y / 264) * 100}%`,
-                      width: `${(layer.w / 466) * 100}%`,
-                      height: `${(layer.h / 264) * 100}%`,
-                      transform: undefined,
-                    }}
-                  />
-                ))}
-              </div>
-              <span className="learn-more">
-                learn more
-                <Graphic name="imgVector234257606" />
-              </span>
-              <div className="project-tags">
-                {project.tags.map((tag) => (
-                  <span key={tag}>{tag}</span>
-                ))}
-              </div>
-            </div>
-            <div className="project-caption">
-              <h3>{project.title}</h3>
-              <div>
-                {project.categories.map((category) => (
-                  <span key={category}>{category}</span>
-                ))}
-              </div>
-            </div>
-          </article>
+          <ProjectCard key={project.title} project={project} />
         ))}
       </div>
     </section>
@@ -266,6 +286,37 @@ function About() {
     </section>
   );
 }
+const portugalTime = new Intl.DateTimeFormat("en-US", {
+  timeZone: "Europe/Lisbon",
+  hour: "numeric",
+  minute: "2-digit",
+  hour12: true,
+});
+const portugalOffset = new Intl.DateTimeFormat("en-US", {
+  timeZone: "Europe/Lisbon",
+  timeZoneName: "shortOffset",
+});
+function PortugalClock() {
+  const [now, setNow] = useState(() => new Date());
+  useEffect(() => {
+    const refresh = () => setNow(new Date());
+    const interval = setInterval(refresh, 1000);
+    document.addEventListener("visibilitychange", refresh);
+    return () => {
+      clearInterval(interval);
+      document.removeEventListener("visibilitychange", refresh);
+    };
+  }, []);
+  const offset =
+    portugalOffset
+      .formatToParts(now)
+      .find((part) => part.type === "timeZoneName")?.value ?? "GMT";
+  return (
+    <time dateTime={now.toISOString()} aria-label="Current time in Portugal">
+      portugal · {portugalTime.format(now)} {offset}
+    </time>
+  );
+}
 function Contact() {
   const [message, setMessage] = useState("");
   const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
@@ -314,7 +365,9 @@ function Contact() {
         <span className="laptop-cover" />
       </div>
       <p className="copyright">© 2026 alisa korsak</p>
-      <p className="location-time">portugal · 5:23 AM GMT+1</p>
+      <p className="location-time">
+        <PortugalClock />
+      </p>
       <p className="credit">Built with react</p>
     </footer>
   );
