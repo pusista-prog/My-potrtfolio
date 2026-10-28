@@ -10,7 +10,7 @@ const files = [
   "public/fonts/PPTelegraf-Ultrabold.woff2",
   "public/fonts/PPTelegraf-Regular.woff2",
   "public/fonts/roboto-mono-latin-300-normal.woff2",
-  "public/fonts/roboto-mono-latin-500-normal.woff2",
+  "public/fonts/roboto-mono-latin-400-normal.woff2",
 ];
 for (const file of files) {
   const info = await stat(new URL(`../${file}`, import.meta.url));

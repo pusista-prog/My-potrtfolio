@@ -101,32 +101,48 @@
     {
       "file": "imgProjectImage4.jpg",
       "node": "6388:24",
-      "export": "JPG, 1× node size"
+      "export": "JPG, 1\u00d7 node size"
     },
     {
       "file": "imgPexelsZenChung55375681.jpg",
       "node": "6388:39",
-      "export": "JPG, 1× node size"
+      "export": "JPG, 1\u00d7 node size"
     },
     {
       "file": "imgIPhoneGreenSofaMockup1.jpg",
       "node": "6388:53",
-      "export": "JPG, 1× node size"
+      "export": "JPG, 1\u00d7 node size"
     },
     {
       "file": "imgAlicekTwoHappyYoungAdultsAManAndAWomanMovingIntoAN7C40D0D0Fb094C4B8DacF0Ca4370827C1.jpg",
       "node": "6388:317",
-      "export": "JPG, 1× node size"
+      "export": "JPG, 1\u00d7 node size"
     },
     {
       "file": "imgImg65611.jpg",
       "node": "6388:128",
-      "export": "JPG, 1× node size"
+      "export": "JPG, 1\u00d7 node size"
     },
     {
       "file": "imgChatGptImage2120261947201.jpg",
       "node": "6388:286",
-      "export": "JPG, 1× node size"
+      "export": "JPG, 1\u00d7 node size"
+    },
+    {
+      "file": "workspace-cup.svg",
+      "node": "6388:278"
+    },
+    {
+      "file": "sidebar-notch-left.svg",
+      "node": "6388:305"
+    },
+    {
+      "file": "sidebar-notch-right.svg",
+      "node": "6388:306"
+    },
+    {
+      "file": "contact-illustration.svg",
+      "source": "User-provided Contact Illustration.svg"
     }
   ]
 }

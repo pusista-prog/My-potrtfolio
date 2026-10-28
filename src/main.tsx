@@ -26,17 +26,7 @@ function WorkspaceIllustration() {
       <div className="workspace-base">
         <Graphic name="imgVector234257597" />
       </div>
-      <div className="cup-body">
-        <Graphic name="imgRectangle240652056" />
-      </div>
-      <div className="cup-handle">
-        <Graphic name="imgVector234257598" />
-      </div>
-      <div className="cup-string">
-        <Graphic name="imgVector234257599" />
-      </div>
-      <div className="cup-label" />
-      <div className="cup-base" />
+      <Graphic name="workspace-cup" className="workspace-cup" />
     </div>
   );
 }
@@ -77,6 +67,8 @@ function Sidebar() {
           </a>
         </div>
       </div>
+      <Graphic name="sidebar-notch-left" className="sidebar-notch sidebar-notch-left" />
+      <Graphic name="sidebar-notch-right" className="sidebar-notch sidebar-notch-right" />
     </aside>
   );
 }
@@ -123,7 +115,7 @@ function SectionHeading({
 }) {
   return (
     <header className={`section-heading heading-${number}`}>
-      <span className="section-number">[{number}]</span>
+      <span className="section-number"><span>[</span><span className="section-digit">{number}</span><span>]</span></span>
       <h2>{children}</h2>
     </header>
   );
@@ -344,14 +336,14 @@ function Contact() {
       <div className="reach">
         <p className="muted">reach me</p>
         <button className="email" onClick={copyEmail}>
-          {email}
+          <span className="animated-link">{email}</span>
           <Graphic name="imgCopy" />
         </button>
         <span className="copy-status" role="status">
           {message}
         </span>
         <a
-          className="telegram"
+          className="telegram animated-link"
           href="https://t.me/a_cheers"
           target="_blank"
           rel="noopener noreferrer"
@@ -361,8 +353,7 @@ function Contact() {
         </a>
       </div>
       <div className="contact-illustration">
-        <Graphic name="imgIllustrationFrame" />
-        <span className="laptop-cover" />
+        <Graphic name="contact-illustration" />
       </div>
       <p className="copyright">© 2026 alisa korsak</p>
       <p className="location-time">
@@ -394,7 +385,7 @@ function App() {
       <main>
         <nav aria-label="Main navigation">
           {["Projects", "Skills", "About", "Contact"].map((item) => (
-            <a key={item} href={`#${item.toLowerCase()}`}>
+            <a className="animated-link" key={item} href={`#${item.toLowerCase()}`}>
               {item}
             </a>
           ))}
