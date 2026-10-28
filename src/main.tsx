@@ -41,7 +41,7 @@ function Sidebar() {
         <div>
           <img
             className="avatar"
-            src={image("imgChatGptImage2120261947201", "jpg")}
+            src={image("profile-alisa", "png")}
             alt="Alisa Korsak"
           />
           <h1>Hello, I'm Alisa</h1>
@@ -77,7 +77,7 @@ const projects = [
     title: "MATCH POINT",
     categories: ["#sports", "#tennis"],
     tags: ["website", "ui/ux", "branding"],
-    layers: [{ name: "imgProjectImage4", x: 0, y: 0, w: 466, h: 264 }],
+    layers: [{ name: "project-match-point", x: 0, y: 0, w: 466, h: 264 }],
   },
   {
     title: "NUYUT",
@@ -85,7 +85,7 @@ const projects = [
     tags: ["website", "ux/ui"],
     layers: [
       {
-        name: "imgAlicekTwoHappyYoungAdultsAManAndAWomanMovingIntoAN7C40D0D0Fb094C4B8DacF0Ca4370827C1",
+        name: "project-nuyut",
         x: 0,
         y: 0,
         w: 466,
@@ -97,13 +97,13 @@ const projects = [
     title: "SEOUL language camp",
     categories: ["#education", "#languages"],
     tags: ["website", "ui/ux", "branding"],
-    layers: [{ name: "imgPexelsZenChung55375681", x: 0, y: 0, w: 466, h: 264 }],
+    layers: [{ name: "project-seoul-language-camp", x: 0, y: 0, w: 466, h: 264 }],
   },
   {
     title: "PERFECTION LAB",
     categories: ["#beauty"],
     tags: ["website", "ui/ux"],
-    layers: [{ name: "imgIPhoneGreenSofaMockup1", x: 0, y: 0, w: 466, h: 264 }],
+    layers: [{ name: "project-perfection-lab", x: 0, y: 0, w: 466, h: 264 }],
   },
 ];
 function SectionHeading({
@@ -141,7 +141,7 @@ function ProjectCard({ project }: { project: (typeof projects)[number] }) {
           {project.layers.map((layer) => (
             <img
               key={layer.name}
-              src={image(layer.name, "jpg")}
+              src={image(layer.name, "png")}
               alt=""
               style={{ left: 0, top: 0, width: "100%", height: "100%" }}
             />
