@@ -3,7 +3,7 @@
   .cat-eye {
     transform-box: fill-box;
     transform-origin: center;
-    animation: cat-blink 5s ease-in-out infinite;
+    animation: cat-blink 4s ease-in-out infinite;
   }
   @keyframes cat-blink {
     0%, 92%, 96%, 100% { transform: scaleY(1); }
